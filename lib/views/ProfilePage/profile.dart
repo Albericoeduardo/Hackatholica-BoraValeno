@@ -1,7 +1,6 @@
 import 'package:boravaleno/designSytem/components/BottomTabBar/bottom_tab_bar.dart';
 import 'package:boravaleno/designSytem/components/BottomTabBar/bottom_tab_bar_view_model.dart';
 import 'package:boravaleno/designSytem/shared/styles.dart';
-import 'package:boravaleno/views/LoginPage/login.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -17,16 +16,6 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-        titleTextStyle: const TextStyle(
-          fontFamily: 'Inter',
-          color: Colors.black,
-          fontSize: 34,
-          fontWeight: FontWeight.bold,
-        ),
-        titleSpacing: 30,
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
                 child: SingleChildScrollView(
@@ -47,7 +36,7 @@ class ProfilePage extends StatelessWidget {
               Row(
                 children: [
                   Image.asset(
-                    'assets/images/AvatarProfile.png',
+                    'assets/AvatarProfile.png',
                     width: 64,
                     height: 64,
                   ),
@@ -97,7 +86,7 @@ class ProfilePage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomTabBar.instantiate(
-        currentIndex: 3,
+        currentIndex: 2,
         viewModel: BottomTabBarViewModel(
           bottomTabs: [
             const BottomNavigationBarItem(
@@ -105,12 +94,8 @@ class ProfilePage extends StatelessWidget {
               label: "Home",
             ),
             const BottomNavigationBarItem(
-              icon: Icon(Icons.message),
-              label: "Messages",
-            ),
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.label),
-              label: "Label",
+              icon: Icon(Icons.star),
+              label: "Ranking",
             ),
             const BottomNavigationBarItem(
               icon: Icon(Icons.person),

@@ -1,5 +1,8 @@
 import 'package:boravaleno/designSytem/components/BottomTabBar/bottom_tab_bar_view_model.dart';
 import 'package:boravaleno/designSytem/shared/colors.dart';
+import 'package:boravaleno/views/MapPage/map.dart';
+import 'package:boravaleno/views/ProfilePage/profile.dart';
+import 'package:boravaleno/views/Ranking/ranking.dart';
 import 'package:flutter/material.dart';
 class BottomTabBar extends StatelessWidget {
   final BottomTabBarViewModel viewModel;
@@ -13,6 +16,12 @@ class BottomTabBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> pages = [
+      const MapPage(),
+      const RankingPage(),
+      ProfilePage(),
+    ];
+
     return BottomNavigationBar(
       items: viewModel.bottomTabs,
       type: BottomNavigationBarType.fixed,
@@ -20,7 +29,12 @@ class BottomTabBar extends StatelessWidget {
       unselectedItemColor: darkPrimaryBaseColorLight,
       showUnselectedLabels: true,
       currentIndex: currentIndex,
-      onTap: viewModel.onIndexChanged,
+      onTap: (index) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => pages[index]),
+        );
+      },
     );
   }
 }
