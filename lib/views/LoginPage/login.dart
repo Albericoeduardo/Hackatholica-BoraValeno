@@ -25,12 +25,12 @@ class _LoginPageState extends State<LoginPage> {
     try {
       UserCredential userCredential = await auth.signInWithEmailAndPassword(
         email: emailController.text.trim(),
-        password: passwordController.text.trim()
+        password: passwordController.text.trim(),
       );
-      if (userCredential.user != null){
-        Navigator.push(
+      if (userCredential.user != null) {
+        Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => ProfilePage())
+          MaterialPageRoute(builder: (context) => ProfilePage()),
         );
         print("Login realizado com sucesso");
       }
@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(height: 64,),
+              const SizedBox(height: 64),
               Container(
                 margin: const EdgeInsets.only(bottom: 32),
                 decoration: BoxDecoration(
@@ -61,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                   fit: BoxFit.cover,
                 ),
               ),
-              const SizedBox(height: 64,),
+              const SizedBox(height: 64),
               StyledInputField.instantiate(
                 viewModel: InputTextViewModel(
                   controller: emailController,
@@ -70,11 +70,11 @@ class _LoginPageState extends State<LoginPage> {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Esse campo é obrigatório';
-                    } else if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
-                      return 'Somente letras são permitidas!';
+                    } else if (!RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}').hasMatch(value)) {
+                      return 'Por favor, insira um e-mail válido!';
                     }
                     return null;
-                  }
+                  },
                 ),
               ),
               const SizedBox(height: 16),
@@ -89,32 +89,8 @@ class _LoginPageState extends State<LoginPage> {
                       return 'Esse campo é obrigatório';
                     }
                     return null;
-                  }
+                  },
                 ),
-              ],
-            ),
-            const SizedBox(height: 24),
-            ActionButton.instantiate(
-              viewModel: ActionButtonViewModel(
-                style: ActionButtonStyle.primary,
-                size: ActionButtonSize.large,
-                text: 'Login',
-                onPressed: login
-              ),
-              const SizedBox(height: 24),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  LinkedLabel.instantiate(
-                    viewModel: LinkedLabelViewModel(
-                      fullText: 'Forgot Password',
-                      linkedText: 'Forgot Password',
-                      onLinkTap: () {
-                        print('Esqueceu a senha?');
-                      }
-                    ),
-                  ),
-                ],
               ),
               const SizedBox(height: 24),
               ActionButton.instantiate(
@@ -122,21 +98,31 @@ class _LoginPageState extends State<LoginPage> {
                   style: ActionButtonStyle.primary,
                   size: ActionButtonSize.large,
                   text: 'Login',
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ProfilePage())
-                    );
-                  }
+                  onPressed: login,
                 ),
               ),
-              const SizedBox(height: 96),
+              const SizedBox(height: 24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  LinkedLabel.instantiate(
+                    viewModel: LinkedLabelViewModel(
+                      fullText: 'Forgot Password?',
+                      linkedText: 'Clique aqui',
+                      onLinkTap: () {
+                        print('Esqueceu a senha?');
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 24),
               const Text(
                 'Don\'t Have An Account?',
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.black,
-                  fontWeight: FontWeight.w600
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               const SizedBox(height: 24),
@@ -150,12 +136,13 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const SignUpPage())
-                      );        
-                    }
+                        MaterialPageRoute(builder: (context) => const SignUpPage()),
+                      );
+                    },
                   ),
                 ),
               ),
+              const SizedBox(height: 96),
             ],
           ),
         ),
