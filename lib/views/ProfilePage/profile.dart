@@ -29,93 +29,71 @@ class ProfilePage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Title(
+                  color: Colors.black,
+                  child: const Text(
+                    'Perfil',
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Row(
                 children: [
-                  Container(
-                    margin: const EdgeInsets.only(right: 16),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(24.0),
-                    ),
-                    clipBehavior: Clip.hardEdge,
-                    child: Image.asset(
-                      'AvatarProfile.png',
-                      fit: BoxFit.cover,
+                  Image.asset(
+                    'assets/images/AvatarProfile.png',
+                    width: 64,
+                    height: 64,
+                  ),
+                  const SizedBox(width: 20),
+                  const Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Amanda Doe',
+                          style: button1Bold,
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(width: 8,),
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Amanda Doe',
-                        style: TextStyle(
-                          fontFamily: 'Inter',
-                          color: Colors.black,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        'amanda@gmail.com',
-                        style: TextStyle(
-                          fontFamily: 'Inter',
-                          color: Colors.grey,
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      )
-                    ],
-                  )
+                  const SizedBox(width: 20),
+                                    IconButton(
+                    icon: Icon(Icons.edit),
+                    onPressed: () {},
+                    ),
+                  const SizedBox(width: 20),
                 ],
               ),
-            ),
-            const SizedBox(height: 32),
-            ...functions.map((name) => Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              const SizedBox(height: 40),
+              const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
                     children: [
-                      Text(
-                        name,
-                        style: paragraph1Regular
-                      ),
-                      const Icon(Icons.arrow_forward_ios_rounded)
+                      Text("Partidas Jogadas", style: TextStyle(fontSize:20)),
+                      const SizedBox(height: 8),
+                      Text("100", style: TextStyle(fontSize: 46)),
                     ],
-                  ),
-                ),
-              ],
-            )).toList(),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LoginPage(),
                     ),
-                  );
-                },
-                child: Text(
-                  'Logout',
-                  style: paragraph1Regular.copyWith(
-                    color: Colors.red,
-                  ),
+                    Column(
+                    children: [
+                      Text("% Vitórias", style: TextStyle(fontSize: 20)),
+                      const SizedBox(height: 8),
+                      Text("31", style: TextStyle(fontSize: 46)),
+                    ],
+                    ),
+                  ],
                 ),
-              ),
-            )
-          ],
+
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: BottomTabBar.instantiate(
