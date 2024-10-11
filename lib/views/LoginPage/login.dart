@@ -6,6 +6,7 @@ import 'package:boravaleno/designSytem/components/LinkedLabel/linked_label.dart'
 import 'package:boravaleno/designSytem/components/LinkedLabel/linked_label_view_model.dart';
 import 'package:boravaleno/views/ProfilePage/profile.dart';
 import 'package:boravaleno/views/SignupPage/signup.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -18,6 +19,25 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
+  Future<void> login() async {
+    try {
+      UserCredential userCredential = await auth.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim()
+      );
+      if (userCredential.user != null){
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ProfilePage())
+        );
+        print("Login realizado com sucesso");
+      }
+    } on FirebaseAuthException catch (e) {
+      print("Erro de login: $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +91,15 @@ class _LoginPageState extends State<LoginPage> {
                     return null;
                   }
                 ),
+              ],
+            ),
+            const SizedBox(height: 24),
+            ActionButton.instantiate(
+              viewModel: ActionButtonViewModel(
+                style: ActionButtonStyle.primary,
+                size: ActionButtonSize.large,
+                text: 'Login',
+                onPressed: login
               ),
               const SizedBox(height: 24),
               Row(
