@@ -2,7 +2,7 @@ import 'package:boravaleno/designSytem/components/BottomTabBar/bottom_tab_bar_vi
 import 'package:boravaleno/designSytem/shared/colors.dart';
 import 'package:boravaleno/views/MapPage/map.dart';
 import 'package:boravaleno/views/ProfilePage/profile.dart';
-import 'package:boravaleno/views/Ranking/ranking.dart';
+import 'package:boravaleno/views/RankingPage/ranking.dart';
 import 'package:flutter/material.dart';
 class BottomTabBar extends StatelessWidget {
   final BottomTabBarViewModel viewModel;

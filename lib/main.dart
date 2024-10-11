@@ -1,6 +1,4 @@
 import 'package:boravaleno/firebase_options.dart';
-import 'package:boravaleno/views/HomePage/home.dart';
-import 'package:boravaleno/views/LoginPage/login.dart';
 import 'package:boravaleno/views/MapPage/map.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
